@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Swap</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #imageContainer {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #imageContainer img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: opacity 2s ease; /* Add transition for smooth opacity change */
+        }
+    </style>
+</head>
+<body>
+<div id="imageContainer">
+    <img id="ImageA" src="normal.jpg" alt="Image A" onclick="swapZIndex()">
+    <img id="ImageB" src="illuminated.jpg" alt="Image B" onclick="swapZIndex()">
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const ImageA = document.getElementById('ImageA');
+    const ImageB = document.getElementById('ImageB');
+    ImageA.style.zIndex = 0;
+    ImageB.style.zIndex = 1;
+    ImageB.style.opacity = 0;
+});
+
+function swapZIndex() {
+    const ImageA = document.getElementById('ImageA');
+    const ImageB = document.getElementById('ImageB');
+
+    if (parseInt(ImageA.style.zIndex, 10) === 0) {
+        ImageA.style.zIndex = 1;
+        ImageB.style.zIndex = 0;
+        setTimeout(() => {
+            ImageB.style.opacity = 1;
+            ImageA.style.opacity = 0;
+        }, 0);
+    } else {
+        ImageA.style.zIndex = 0;
+        ImageB.style.zIndex = 1;
+        setTimeout(() => {
+            ImageA.style.opacity = 1;
+            ImageB.style.opacity = 0;
+        }, 0);
+    }
+}
+</script>
+</body>
+</html>
